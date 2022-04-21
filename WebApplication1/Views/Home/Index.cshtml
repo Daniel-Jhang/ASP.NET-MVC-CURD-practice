@@ -1,0 +1,96 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<WebApplication1.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+<table class="table table-responsive table-condensed table-hover">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductID)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsInStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsOnOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ReorderLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Discontinued)
+            </th>
+            <th>
+                分類名稱
+            </th>
+            <th>
+                供應商名稱
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReorderLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discontinued)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suppliers.CompanyName)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "Edit", new { ProductID = item.ProductID }) |
+                    @Html.ActionLink("細節", "Details", new { ProductID = item.ProductID }) |
+                    @Html.ActionLink("刪除", "Delete", new { ProductID = item.ProductID }, new { onclick = "return confirm('確定刪除嗎?')" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
